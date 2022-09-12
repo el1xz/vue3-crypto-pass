@@ -1,13 +1,13 @@
 <template>
     <div>
-        <div class="max-w-[800px] m-auto mt-8 border border-gray-300 px-4 py-2 rounded">
+        <div class="max-w-[400px] m-auto mt-8 border border-gray-300 bg-white px-4 py-2 rounded">
             <h1 class="text-[18px]">
                 Выбрать настройки:
             </h1>
             <div class="mt-6">
                 <div class="slide_container flex items-center">
                     <label class="text-[18px] mr-4" for="passRange">Длина: {{ passLength }}</label>
-                    <input v-model="passLength" min="8" max="24" class="w-[calc(100%-10rem)]" type="range">
+                    <input v-model="passLength" min="8" max="16" class="w-[calc(100%-10rem)]" type="range">
                 </div>
                 <div class="options">
                     <div class="flex items-center gap-2" v-for="(option, index) in optiondata" :key="index">
@@ -16,13 +16,11 @@
                     </div>
                 </div>
 
+                <input class="mt-1 border rounded px-1" type="text" name="" id="" v-model="generatedPassword">
+
                 <div class="mt-2">
                     <button @click="refreshPass = !refreshPass"
                         class="border border-gray-300 rounded text-gray-400 px-2 py-1 rounded transition-all hover:border-gray-600 hover:text-gray-800">Сбросить</button>
-                </div>
-
-                <div>
-                    {{ generatedPassword }}
                 </div>
             </div>
         </div>
@@ -33,7 +31,7 @@
 export default {
     data() {
         return {
-            passLength: 16,
+            passLength: 12,
             refreshPass: false,
             optiondata: [
                 {
@@ -53,7 +51,7 @@ export default {
                 },
                 {
                     name: 'Символы',
-                    status: false,
+                    status: true,
                     chars: '!$%&?+*#-/'
                 }
             ]
