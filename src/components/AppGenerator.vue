@@ -1,3 +1,8 @@
+<script setup>
+import { useClipboard } from '@vueuse/core'
+const { copy, copied } = useClipboard()
+</script>
+
 <template>
     <div>
         <div class="max-w-[450px] m-auto mt-8 border border-gray-300 bg-white px-8 py-5 rounded-xl">
@@ -27,7 +32,7 @@
                         </svg>
                     </span>
                 </div>
-                <div @click="copy"
+                <div @click="copy(generatedPassword)"
                     class="h-[34px] bg-blue-400 px-2 py-1 rounded-lg flex items-center gap-1 text-white cursor-pointer hover:bg-blue-500 transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
                         <path
@@ -36,8 +41,9 @@
                             d="M4.5 6A1.5 1.5 0 003 7.5v9A1.5 1.5 0 004.5 18h7a1.5 1.5 0 001.5-1.5v-5.879a1.5 1.5 0 00-.44-1.06L9.44 6.439A1.5 1.5 0 008.378 6H4.5z" />
                     </svg>
 
-                    <p class="text-[16px] select-none">
-                        COPY
+                    <p class="text-[16px] select-none uppercase">
+                        <span v-if='!copied'>Copy</span>
+                        <span v-else>Copied!</span>
                     </p>
                 </div>
             </div>
@@ -64,6 +70,7 @@
 </template>
 
 <script>
+
 export default {
     data() {
         return {
@@ -88,15 +95,9 @@ export default {
                 {
                     name: 'Special',
                     status: true,
-                    chars: '!$%&?+*#-/'
+                    chars: '!$%^&?+*#-_/'
                 }
             ]
-        }
-    },
-    methods: {
-        copy() {
-            this.$refs.clone.focus();
-            document.execCommand('copy');
         }
     },
     computed: {
